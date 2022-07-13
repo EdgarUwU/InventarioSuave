@@ -2,6 +2,7 @@
 
 	<form class="box login" action="" method="POST" autocomplete="off">
 		<h5 class="title is-5 has-text-centered is-uppercase">Sistema de inventario</h5>
+		<img src="img/logo.jpg" alt="logo" class="logo">
 
 		<div class="field">
 			<label class="label">Usuario</label>

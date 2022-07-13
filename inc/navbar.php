@@ -2,7 +2,7 @@
 
     <div class="navbar-brand">
         <a class="navbar-item" href="index.php?vista=home">
-        <img src="./img/logo.jpg" width="65" height="28">
+		<img src="img/logo.jpg" alt="logo" class="logo2">
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
@@ -30,7 +30,7 @@
 
                 <div class="navbar-dropdown">
                     <a href="index.php?vista=category_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=category_new" class="navbar-item">Nuevo</a>
+                    <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
                     <a href="index.php?vista=category_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
@@ -39,7 +39,6 @@
                 <a class="navbar-link">Productos</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
                     <a href="index.php?vista=product_list" class="navbar-item">Lista</a>
                     <a href="index.php?vista=product_search" class="navbar-item">Buscar</a>
                 </div>

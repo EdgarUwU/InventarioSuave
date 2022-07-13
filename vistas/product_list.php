@@ -25,7 +25,7 @@
 
         $pagina=limpiar_cadena($pagina);
         $url="index.php?vista=product_list&page="; /* <== */
-        $registros=6;
+        $registros=8;
         $busqueda="";
 
         # Paginador producto #

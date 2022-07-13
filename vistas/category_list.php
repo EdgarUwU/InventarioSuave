@@ -23,7 +23,7 @@
 
         $pagina=limpiar_cadena($pagina);
         $url="index.php?vista=category_list&page="; /* <== */
-        $registros=6;
+        $registros=8;
         $busqueda="";
 
         # Paginador categoria #
