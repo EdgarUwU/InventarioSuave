@@ -6,52 +6,77 @@
 
 	<div class="form-rest mb-6 mt-6"></div>
 
-	<form action="./php/usuario_guardar.php" method="POST" class="FormularioAjax" autocomplete="off" >
+	<form action="./php/usuario_guardar.php" method="POST" class="FormularioAjax" autocomplete="off">
 		<div class="columns">
-		  	<div class="column">
-		    	<div class="control">
-					<label>Nombres</label>
+			<div class="column">
+				<div class="control">
+					<label>Nombre</label>
 					<span>*</span>
-				  	<input class="input" type="text" name="usuario_nombre" maxlength="40" required >
+					<input class="input" type="text" name="usuario_nombre" maxlength="40" required>
 				</div>
-		  	</div>
-		  	<div class="column">
-		    	<div class="control">
-					<label>Apellidos</label>
-				  	<input class="input" type="text" name="usuario_apellido" maxlength="40" required >
+			</div>
+			<div class="column">
+				<div class="control">
+					<label>Apellido Paterno</label>
+					<input class="input" type="text" name="usuario_apellido" maxlength="40">
 				</div>
-		  	</div>
+			</div>
+			<div class="column">
+				<div class="control">
+					<label>Apellido Materno</label>
+					<input class="input" type="text" name="usuario_apellido" maxlength="40">
+				</div>
+			</div>
 		</div>
 		<div class="columns">
-		  	<div class="column">
-		    	<div class="control">
+			<div class="column">
+				<div class="control">
 					<label>Usuario</label>
 					<span>*</span>
-				  	<input class="input" type="text" name="usuario_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required >
+					<input class="input" type="text" name="usuario_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required>
 				</div>
-		  	</div>
-		  	<div class="column">
-		    	<div class="control">
-					<label>Email</label>
-				  	<input class="input" type="email" name="usuario_email" maxlength="70" >
+			</div>
+			<div class="column">
+				<div class="control">
+					<label>Contraseña</label>
+					<span>*</span>
+					<input class="input" type="password" name="usuario_clave_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
 				</div>
-		  	</div>
+			</div>
+			<div class="column">
+				<div class="control">
+					<label>Repetir Contraseña</label>
+					<span>*</span>
+					<input class="input" type="password" name="usuario_clave_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
+				</div>
+			</div>
 		</div>
-		<div class="columns">
-		  	<div class="column">
-		    	<div class="control">
-					<label>Clave</label>
-					<span>*</span>
-				  	<input class="input" type="password" name="usuario_clave_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required >
+		<div class="column">
+			<div class="control">
+				<label>Permiso</label><br>
+				<div class="select is-rounded">
+					<select name="producto_categoria">
+						<option value="" selected="">Seleccione una opción</option>
+						<option value="1">Administrador</option>
+						<option value="2">Usuario</option>
+						<option value="3">Auditor</option>
+					</select>
 				</div>
-		  	</div>
-		  	<div class="column">
-		    	<div class="control">
-					<label>Repetir clave</label>
-					<span>*</span>
-				  	<input class="input" type="password" name="usuario_clave_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required >
+			</div>
+		</div>
+		<div class="column">
+			<div class="control">
+				<label>Foto</label><br>
+				<div class="file is-small has-name">
+					<label class="file-label">
+						<input class="file-input" type="file" name="producto_foto" accept=".jpg, .png, .jpeg">
+						<span class="file-cta">
+							<span class="file-label">Buscar</span>
+						</span>
+						<span class="file-name">JPG, JPEG, PNG. (MAX 3MB)</span>
+					</label>
 				</div>
-		  	</div>
+			</div>
 		</div>
 		<p class="has-text-centered">
 			<button type="submit" class="button is-info is-rounded">Guardar</button>

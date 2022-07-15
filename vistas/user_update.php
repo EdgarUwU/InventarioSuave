@@ -14,8 +14,6 @@
 <div class="container pb-6 pt-6">
 	<?php
 
-		include "./inc/btn_back.php";
-
 		require_once "./php/main.php";
 
         /*== Verificando usuario ==*/
@@ -41,8 +39,14 @@
 		  	</div>
 		  	<div class="column">
 		    	<div class="control">
-					<label>Apellidos</label>
+					<label>Apellido Paterno</label>
 				  	<input class="input" type="text" name="usuario_apellido" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required value="<?php echo $datos['usuario_apellido']; ?>" >
+				</div>
+		  	</div>
+			  <div class="column">
+		    	<div class="control">
+					<label>Apellido Materno</label>
+				  	<input class="input" type="text" name="usuario_apellido_materno" pattern="[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}" maxlength="40" required value="<?php echo $datos['usuario_apellido']; ?>" >
 				</div>
 		  	</div>
 		</div>
@@ -51,12 +55,6 @@
 		    	<div class="control">
 					<label>Usuario</label>
 				  	<input class="input" type="text" name="usuario_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required value="<?php echo $datos['usuario_usuario']; ?>" >
-				</div>
-		  	</div>
-		  	<div class="column">
-		    	<div class="control">
-					<label>Email</label>
-				  	<input class="input" type="email" name="usuario_email" maxlength="70" value="<?php echo $datos['usuario_email']; ?>" >
 				</div>
 		  	</div>
 		</div>
@@ -68,13 +66,13 @@
 		<div class="columns">
 			<div class="column">
 		    	<div class="control">
-					<label>Clave</label>
+					<label>Contraseña</label>
 				  	<input class="input" type="password" name="usuario_clave_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
 				</div>
 		  	</div>
 		  	<div class="column">
 		    	<div class="control">
-					<label>Repetir clave</label>
+					<label>Repetir Contraseña</label>
 				  	<input class="input" type="password" name="usuario_clave_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" >
 				</div>
 		  	</div>
@@ -92,7 +90,7 @@
 		  	</div>
 		  	<div class="column">
 		    	<div class="control">
-					<label>Clave</label>
+					<label>Contraseña</label>
 				  	<input class="input" type="password" name="administrador_clave" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required >
 				</div>
 		  	</div>
@@ -106,5 +104,6 @@
 			include "./inc/error_alert.php";
 		}
 		$check_usuario=null;
+		include "./inc/btn_back.php";
 	?>
 </div>

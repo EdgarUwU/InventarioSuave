@@ -14,12 +14,6 @@
 		<div class="columns">
 		  	<div class="column">
 		    	<div class="control">
-					<label>Código de barra</label>
-				  	<input class="input" type="text" name="producto_codigo" pattern="[a-zA-Z0-9- ]{1,70}" maxlength="70" required >
-				</div>
-		  	</div>
-		  	<div class="column">
-		    	<div class="control">
 					<label>Nombre</label>
 				  	<input class="input" type="text" name="producto_nombre" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required >
 				</div>
@@ -39,7 +33,7 @@
 				</div>
 		  	</div>
 		  	<div class="column">
-				<label>Categoría</label><br>
+				<label>Marca</label><br>
 		    	<div class="select is-rounded">
 				  	<select name="producto_categoria" >
 				    	<option value="" selected="" >Seleccione una opción</option>
@@ -55,6 +49,15 @@
 				   			$categorias=null;
 				    	?>
 				  	</select>
+				</div>
+		  	</div>
+		  	<div class="column">
+				<div class="control">
+					<labes>Descripción</labes>
+				  	<textarea class="textarea" name="producto_descripcion" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,500}" maxlength="500" required ></textarea>
+					<script>
+						CKEDITOR.replace('producto_descripcion');
+					</script>
 				</div>
 		  	</div>
 		</div>
