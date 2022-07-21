@@ -12,19 +12,19 @@
 				<div class="control">
 					<label>Nombre</label>
 					<span>*</span>
-					<input class="input" type="text" name="usuario_nombre" maxlength="40" required>
+					<input class="input" type="text" name="nombre" maxlength="45" required>
 				</div>
 			</div>
 			<div class="column">
 				<div class="control">
 					<label>Apellido Paterno</label>
-					<input class="input" type="text" name="usuario_apellido" maxlength="40">
+					<input class="input" type="text" name="apellido_pat" maxlength="45">
 				</div>
 			</div>
 			<div class="column">
 				<div class="control">
 					<label>Apellido Materno</label>
-					<input class="input" type="text" name="usuario_apellido" maxlength="40">
+					<input class="input" type="text" name="apellido_mat" maxlength="45">
 				</div>
 			</div>
 		</div>
@@ -33,21 +33,21 @@
 				<div class="control">
 					<label>Usuario</label>
 					<span>*</span>
-					<input class="input" type="text" name="usuario_usuario" pattern="[a-zA-Z0-9]{4,20}" maxlength="20" required>
+					<input class="input" type="text" name="username" pattern="[a-zA-Z0-9]{4,20}" maxlength="45" required>
 				</div>
 			</div>
 			<div class="column">
 				<div class="control">
 					<label>Contraseña</label>
 					<span>*</span>
-					<input class="input" type="password" name="usuario_clave_1" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
+					<input class="input" type="password" name="contrasena" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
 				</div>
 			</div>
 			<div class="column">
 				<div class="control">
 					<label>Repetir Contraseña</label>
 					<span>*</span>
-					<input class="input" type="password" name="usuario_clave_2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
+					<input class="input" type="password" name="contrasena2" pattern="[a-zA-Z0-9$@.-]{7,100}" maxlength="100" required>
 				</div>
 			</div>
 		</div>
@@ -55,7 +55,7 @@
 			<div class="control">
 				<label>Permiso</label><br>
 				<div class="select is-rounded">
-					<select name="producto_categoria">
+					<select name="permiso_usuario">
 						<option value="" selected="">Seleccione una opción</option>
 						<option value="1">Administrador</option>
 						<option value="2">Usuario</option>
@@ -69,7 +69,7 @@
 				<label>Foto</label><br>
 				<div class="file is-small has-name">
 					<label class="file-label">
-						<input class="file-input" type="file" name="producto_foto" accept=".jpg, .png, .jpeg">
+						<input class="file-input" type="file" name="usuario_foto" accept=".jpg, .png, .jpeg">
 						<span class="file-cta">
 							<span class="file-label">Buscar</span>
 						</span>

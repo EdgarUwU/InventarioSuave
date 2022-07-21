@@ -1,20 +1,24 @@
 <?php
     
     require_once "main.php";
+    require_once "../inc/session_start.php";
 
     /*== Almacenando datos ==*/
-    $nombre=limpiar_cadena($_POST['usuario_nombre']);
-    $apellido=limpiar_cadena($_POST['usuario_apellido']);
+    $nombre=limpiar_cadena($_POST['nombre']);
+    $apellido_pat=limpiar_cadena($_POST['apellido_pat']);
+    $apellido_mat=limpiar_cadena($_POST['apellido_mat']);
 
-    $usuario=limpiar_cadena($_POST['usuario_usuario']);
-    $email=limpiar_cadena($_POST['usuario_email']);
+    $username=limpiar_cadena($_POST['username']);
 
-    $clave_1=limpiar_cadena($_POST['usuario_clave_1']);
-    $clave_2=limpiar_cadena($_POST['usuario_clave_2']);
+    $contrasena_1=limpiar_cadena($_POST['contrasena']);
+    $contrasena_2=limpiar_cadena($_POST['contrasena2']);
+    $permiso=limpiar_cadena($_POST['permiso_usuario']);
+    $create_by=limpiar_cadena($_SESSION['nombre']." ".$_SESSION['apellido']);
+    $ip=limpiar_cadena($_SERVER['REMOTE_ADDR']);
 
 
     /*== Verificando campos obligatorios ==*/
-    if($nombre=="" || $apellido=="" || $usuario=="" || $clave_1=="" || $clave_2==""){
+    if($nombre=="" || $permiso=="" || $username=="" || $contrasena_1=="" || $contrasena_2==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -36,17 +40,8 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]{3,40}",$apellido)){
-        echo '
-            <div class="notification is-danger is-light">
-                <strong>¡Ocurrio un error inesperado!</strong><br>
-                El APELLIDO no coincide con el formato solicitado
-            </div>
-        ';
-        exit();
-    }
 
-    if(verificar_datos("[a-zA-Z0-9]{4,20}",$usuario)){
+    if(verificar_datos("[a-zA-Z0-9]{4,20}",$username)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -56,52 +51,26 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_1) || verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave_2)){
+    if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$contrasena_1) || verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$contrasena_2)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                Las CLAVES no coinciden con el formato solicitado
+                Las contrasenaS no coinciden con el formato solicitado
             </div>
         ';
         exit();
     }
 
 
-    /*== Verificando email ==*/
-    if($email!=""){
-        if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-            $check_email=conexion();
-            $check_email=$check_email->query("SELECT usuario_email FROM usuario WHERE usuario_email='$email'");
-            if($check_email->rowCount()>0){
-                echo '
-                    <div class="notification is-danger is-light">
-                        <strong>¡Ocurrio un error inesperado!</strong><br>
-                        El correo electrónico ingresado ya se encuentra registrado, por favor elija otro
-                    </div>
-                ';
-                exit();
-            }
-            $check_email=null;
-        }else{
-            echo '
-                <div class="notification is-danger is-light">
-                    <strong>¡Ocurrio un error inesperado!</strong><br>
-                    Ha ingresado un correo electrónico no valido
-                </div>
-            ';
-            exit();
-        } 
-    }
-
 
     /*== Verificando usuario ==*/
-    $check_usuario=conexion();
-    $check_usuario=$check_usuario->query("SELECT usuario_usuario FROM usuario WHERE usuario_usuario='$usuario'");
+    $check_usuario=conexion2();
+    $check_usuario=$check_usuario->query("SELECT username FROM USUARIOS WHERE username='$username'");
     if($check_usuario->rowCount()>0){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                El USUARIO ingresado ya se encuentra registrado, por favor elija otro
+                El username ingresado ya se encuentra registrado, por favor elija otro
             </div>
         ';
         exit();
@@ -109,30 +78,35 @@
     $check_usuario=null;
 
 
-    /*== Verificando claves ==*/
-    if($clave_1!=$clave_2){
+    /*== Verificando contrasenas ==*/
+    if($contrasena_1!=$contrasena_2){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
-                Las CLAVES que ha ingresado no coinciden
+                Las contrasenaS que ha ingresado no coinciden
             </div>
         ';
         exit();
     }else{
-        $clave=password_hash($clave_1,PASSWORD_BCRYPT,["cost"=>10]);
+        $contrasena=password_hash($contrasena_1,PASSWORD_BCRYPT,["cost"=>10]);
     }
+    
 
 
     /*== Guardando datos ==*/
     $guardar_usuario=conexion();
-    $guardar_usuario=$guardar_usuario->prepare("INSERT INTO usuario(usuario_nombre,usuario_apellido,usuario_usuario,usuario_clave,usuario_email) VALUES(:nombre,:apellido,:usuario,:clave,:email)");
+    $guardar_usuario=$guardar_usuario->prepare("INSERT INTO USUARIOS (username,nombre,apellido_pat,apellido_mat,contrasena,create_by,ip,privilegios) 
+    VALUES (:username,:nombre,:apellido_pat,:apellido_mat,:contrasena,:create_by,:ip,:privilegios)");
 
     $marcadores=[
+        ":username"=>$username,
         ":nombre"=>$nombre,
-        ":apellido"=>$apellido,
-        ":usuario"=>$usuario,
-        ":clave"=>$clave,
-        ":email"=>$email
+        ":apellido_pat"=>$apellido_pat,
+        ":apellido_mat"=>$apellido_mat,
+        ":contrasena"=>$contrasena,
+        ":create_by"=>$create_by,
+        ":ip"=>$ip,
+        ":privilegios"=>$permiso
     ];
 
     $guardar_usuario->execute($marcadores);

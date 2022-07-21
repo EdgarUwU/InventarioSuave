@@ -1,11 +1,11 @@
 <?php
 	/*== Almacenando datos ==*/
-    $usuario=limpiar_cadena($_POST['login_usuario']);
-    $clave=limpiar_cadena($_POST['login_clave']);
+    $username=limpiar_cadena($_POST['username']);
+    $contrasena=limpiar_cadena($_POST['contrasena']);
 
 
     /*== Verificando campos obligatorios ==*/
-    if($usuario=="" || $clave==""){
+    if($username=="" || $contrasena==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -17,7 +17,7 @@
 
 
     /*== Verificando integridad de los datos ==*/
-    if(verificar_datos("[a-zA-Z0-9]{4,20}",$usuario)){
+    if(verificar_datos("[a-zA-Z0-9]{4,20}",$username)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -27,7 +27,7 @@
         exit();
     }
 
-    if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$clave)){
+    if(verificar_datos("[a-zA-Z0-9$@.-]{7,100}",$contrasena)){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -38,18 +38,21 @@
     }
 
 
-    $check_user=conexion();
-    $check_user=$check_user->query("SELECT * FROM usuario WHERE usuario_usuario='$usuario'");
+    $check_user=conexion2();
+    $check_user=$check_user->query("SELECT * FROM USUARIOS WHERE username='$username'");
     if($check_user->rowCount()==1){
 
     	$check_user=$check_user->fetch();
 
-    	if($check_user['usuario_usuario']==$usuario && password_verify($clave, $check_user['usuario_clave'])){
+    	if($check_user['username']==$username && password_verify($contrasena, $check_user['contrasena'])){
 
-    		$_SESSION['id']=$check_user['usuario_id'];
-    		$_SESSION['nombre']=$check_user['usuario_nombre'];
-    		$_SESSION['apellido']=$check_user['usuario_apellido'];
-    		$_SESSION['usuario']=$check_user['usuario_usuario'];
+    		$_SESSION['id']=$check_user['id_usuario'];
+    		$_SESSION['username']=$check_user['username'];
+    		$_SESSION['nombre']=$check_user['nombre'];
+    		$_SESSION['apellido_pat']=$check_user['apellido_pat'];
+            $_SESSION['apellido_mat']=$check_user['apellido_mat'];
+            $_SESSION['privilegios']=$check_user['privilegios'];
+            //Administrador
 
     		if(headers_sent()){
 				echo "<script> window.location.href='index.php?vista=home'; </script>";

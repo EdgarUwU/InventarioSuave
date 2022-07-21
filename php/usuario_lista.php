@@ -4,19 +4,19 @@
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT * FROM usuario WHERE ((usuario_id!='".$_SESSION['id']."') AND (usuario_nombre LIKE '%$busqueda%' OR usuario_apellido LIKE '%$busqueda%' OR usuario_usuario LIKE '%$busqueda%' OR usuario_email LIKE '%$busqueda%')) ORDER BY usuario_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM USUARIOS WHERE ((id_usuario!='".$_SESSION['id']."') AND (nombre LIKE '%$busqueda%' OR apellido_pat LIKE '%$busqueda%' OR username LIKE '%$busqueda%' OR apellido_mat LIKE '%$busqueda%')) ORDER BY nombre ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(usuario_id) FROM usuario WHERE ((usuario_id!='".$_SESSION['id']."') AND (usuario_nombre LIKE '%$busqueda%' OR usuario_apellido LIKE '%$busqueda%' OR usuario_usuario LIKE '%$busqueda%' OR usuario_email LIKE '%$busqueda%'))";
+		$consulta_total="SELECT COUNT(id_usuario) FROM USUARIOS WHERE ((id_usuario!='".$_SESSION['id']."') AND (nombre LIKE '%$busqueda%' OR apellido_pat LIKE '%$busqueda%' OR username LIKE '%$busqueda%' OR apellido_mat LIKE '%$busqueda%'))";
 
 	}else{
 
-		$consulta_datos="SELECT * FROM usuario WHERE usuario_id!='".$_SESSION['id']."' ORDER BY usuario_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT * FROM USUARIOS WHERE id_usuario!='".$_SESSION['id']."' ORDER BY nombre ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(usuario_id) FROM usuario WHERE usuario_id!='".$_SESSION['id']."'";
+		$consulta_total="SELECT COUNT(id_usuario) FROM USUARIOS WHERE id_usuario!='".$_SESSION['id']."'";
 		
 	}
 
-	$conexion=conexion();
+	$conexion=conexion2();
 
 	$datos = $conexion->query($consulta_datos);
 	$datos = $datos->fetchAll();
@@ -31,11 +31,12 @@
         <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
             <thead>
                 <tr class="has-text-centered">
-                	<th>#</th>
+					<th>Foto</th>
                     <th>Nombres</th>
-                    <th>Apellidos</th>
-                    <th>Usuario</th>
-                    <th>Email</th>
+                    <th>Apellido Paterno</th>
+					<th>Apellido Materno</th>
+                    <th>Username</th>
+					<th>Privilegios</th>
                     <th colspan="2">Opciones</th>
                 </tr>
             </thead>
@@ -48,16 +49,17 @@
 		foreach($datos as $rows){
 			$tabla.='
 				<tr class="has-text-centered" >
-					<td>'.$contador.'</td>
-                    <td>'.$rows['usuario_nombre'].'</td>
-                    <td>'.$rows['usuario_apellido'].'</td>
-                    <td>'.$rows['usuario_usuario'].'</td>
-                    <td>'.$rows['usuario_email'].'</td>
+					<td>'.$rows['Foto'].'</td>
+                    <td>'.$rows['nombre'].'</td>
+                    <td>'.$rows['apellido_pat'].'</td>
+					<td>'.$rows['apellido_mat'].'</td>
+                    <td>'.$rows['username'].'</td>
+					<td>'.$rows['privilegios'].'</td>
                     <td>
-                        <a href="index.php?vista=user_update&user_id_up='.$rows['usuario_id'].'" class="button is-success is-rounded is-small">Actualizar</a>
+                        <a href="index.php?vista=user_update&user_id_up='.$rows['id_usuario'].'" class="button is-success is-rounded is-small">Actualizar</a>
                     </td>
                     <td>
-                        <a href="'.$url.$pagina.'&user_id_del='.$rows['usuario_id'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+                        <a href="'.$url.$pagina.'&user_id_del='.$rows['id_usuario'].'" class="button is-danger is-rounded is-small">Eliminar</a>
                     </td>
                 </tr>
             ';
