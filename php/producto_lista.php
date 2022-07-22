@@ -1,91 +1,89 @@
 <?php
-	$inicio = ($pagina>0) ? (($pagina * $registros)-$registros) : 0;
-	$tabla="";
+$inicio = ($pagina > 0) ? (($pagina * $registros) - $registros) : 0;
+$tabla = "";
 
-	$campos="id_producto,nombre_prod,stock,marca,presentacion,precio,foto";
+$campos = "id_producto,nombre_prod,marca,stock,precio,presentacion,foto,deleted";
 
-	if(isset($busqueda) && $busqueda!=""){
+if (isset($busqueda) && $busqueda != "") {
 
-		$consulta_datos="SELECT $campos FROM PRODUCTO INNER JOIN INVENTARIO ON PRODUCTO.id_producto=INVENTARIO.id_producto LIKE '%$busqueda%' OR PRODUCTO.nombre_prod LIKE '%$busqueda%' ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
+	$consulta_datos = "SELECT $campos FROM PRODUCTO WHERE deleted='0' AND nombre_prod LIKE '%$busqueda%' OR marca LIKE '%$busqueda%' OR presentacion LIKE '%$busqueda%' ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(id_producto) FROM PRODUCTO WHERE marca LIKE '%$busqueda%' OR nombre_prod LIKE '%$busqueda%'";
+	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0' AND marca LIKE '%$busqueda%' OR nombre_prod LIKE '%$busqueda%' OR presentacion LIKE '%$busqueda%' ";
+} else {
 
-	}else{
+	$consulta_datos = "SELECT $campos FROM PRODUCTO WHERE deleted='0' ORDER BY nombre_prod ASC LIMIT $inicio,$registros";
 
-		$consulta_datos="SELECT $campos FROM PRODUCTO INNER JOIN INVENTARIO ON PRODUCTO.id_producto=INVENTARIO.id_producto ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
+	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0'";
+}
 
-		$consulta_total="SELECT COUNT(id_producto) FROM PRODUCTO";
+$conexion = conexion2();
 
-	}
+$datos = $conexion->query($consulta_datos);
+$datos = $datos->fetchAll();
 
-	$conexion=conexion2();
+$total = $conexion->query($consulta_total);
+$total = (int) $total->fetchColumn();
 
-	$datos = $conexion->query($consulta_datos);
-	$datos = $datos->fetchAll();
+$Npaginas = ceil($total / $registros);
 
-	$total = $conexion->query($consulta_total);
-	$total = (int) $total->fetchColumn();
-
-	$Npaginas =ceil($total/$registros);
-
-	if($total>=1 && $pagina<=$Npaginas){
-		$contador=$inicio+1;
-		$pag_inicio=$inicio+1;
-		foreach($datos as $rows){
-			$tabla.='
+if ($total >= 1 && $pagina <= $Npaginas) {
+	$contador = $inicio + 1;
+	$pag_inicio = $inicio + 1;
+	foreach ($datos as $rows) {
+		$tabla .= '
 				<article class="media">
 			        <figure class="media-left">
 			            <p class="image is-64x64">';
-			            if(is_file("./img/producto/".$rows['producto_foto'])){
-			            	$tabla.='<img src="./img/producto/'.$rows['producto_foto'].'">';
-			            }else{
-			            	$tabla.='<img src="./img/producto.png">';
-			            }
-			   $tabla.='</p>
+		if (is_file("./img/producto/" . $rows['foto'])) {
+			$tabla .= '<img src="./img/producto/' . $rows['foto'] . '">';
+		} else {
+			$tabla .= '<img src="./img/producto.png">';
+		}
+		$tabla .= '</p>
 			        </figure>
 			        <div class="media-content">
 			            <div class="content">
 			              <p>
-			                <strong>'.$contador.' - '.$rows['producto_nombre'].'</strong><br>
-			                <strong>CODIGO:</strong> '.$rows['producto_codigo'].', <strong>PRECIO:</strong> $'.$rows['producto_precio'].', <strong>STOCK:</strong> '.$rows['producto_stock'].', <strong>CATEGORIA:</strong> '.$rows['categoria_nombre'].', <strong>REGISTRADO POR:</strong> '.$rows['usuario_nombre'].' '.$rows['usuario_apellido'].'
+			                <strong>' . $contador . ' - ' . $rows['nombre_prod'] . '</strong><br>
+			                <strong>Precio:</strong> $' . $rows['precio'] . ', <strong>Marca:</strong> ' . $rows['marca'] .',  <strong>Stock:</strong> ' . $rows['stock'] . ' , <strong>Descripción:</strong> ' . $rows['presentacion'] . '
 			              </p>
 			            </div>
 			            <div class="has-text-right">
-			                <a href="index.php?vista=product_img&product_id_up='.$rows['producto_id'].'" class="button is-link is-rounded is-small">Imagen</a>
-			                <a href="index.php?vista=product_update&product_id_up='.$rows['producto_id'].'" class="button is-success is-rounded is-small">Actualizar</a>
-			                <a href="'.$url.$pagina.'&product_id_del='.$rows['producto_id'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+			                <a href="index.php?vista=product_img&product_id_up=' . $rows['id_producto'] . '" class="button is-link is-rounded is-small">Imagen</a>
+			                <a href="index.php?vista=product_update&product_id_up=' . $rows['id_producto'] . '" class="button is-success is-rounded is-small">Actualizar</a>
+			                <a href="' . $url . $pagina . '&product_id_del=' . $rows['id_producto'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
 			            </div>
 			        </div>
 			    </article>
 
 			    <hr>
             ';
-            $contador++;
-		}
-		$pag_final=$contador-1;
-	}else{
-		if($total>=1){
-			$tabla.='
+		$contador++;
+	}
+	$pag_final = $contador - 1;
+} else {
+	if ($total >= 1) {
+		$tabla .= '
 				<p class="has-text-centered" >
-					<a href="'.$url.'1" class="button is-link is-rounded is-small mt-4 mb-4">
-						Haga clic acá para recargar el listado
+					<a href="' . $url . '1" class="button is-link is-rounded is-small mt-4 mb-4">
+						Haga clic aqui para recargar el listado
 					</a>
 				</p>
 			';
-		}else{
-			$tabla.='
+	} else {
+		$tabla .= '
 				<p class="has-text-centered" >No hay registros en el sistema</p>
 			';
-		}
 	}
+}
 
-	if($total>0 && $pagina<=$Npaginas){
-		$tabla.='<p class="has-text-right">Mostrando productos <strong>'.$pag_inicio.'</strong> al <strong>'.$pag_final.'</strong> de un <strong>total de '.$total.'</strong></p>';
-	}
+if ($total > 0 && $pagina <= $Npaginas) {
+	$tabla .= '<p class="has-text-right">Mostrando productos <strong>' . $pag_inicio . '</strong> al <strong>' . $pag_final . '</strong> de un <strong>total de ' . $total . '</strong></p>';
+}
 
-	$conexion=null;
-	echo $tabla;
+$conexion = null;
+echo $tabla;
 
-	if($total>=1 && $pagina<=$Npaginas){
-		echo paginador_tablas($pagina,$Npaginas,$url,7);
-	}
+if ($total >= 1 && $pagina <= $Npaginas) {
+	echo paginador_tablas($pagina, $Npaginas, $url, 7);
+}

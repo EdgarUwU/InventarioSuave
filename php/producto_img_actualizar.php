@@ -5,8 +5,8 @@
     $product_id=limpiar_cadena($_POST['img_up_id']);
 
     /*== Verificando producto ==*/
-    $check_producto=conexion();
-    $check_producto=$check_producto->query("SELECT * FROM producto WHERE producto_id='$product_id'");
+    $check_producto=conexion2();
+    $check_producto=$check_producto->query("SELECT * FROM PRODUCTO WHERE id_producto='$product_id'");
 
     if($check_producto->rowCount()==1){
         $datos=$check_producto->fetch();
@@ -57,7 +57,7 @@
 
 
     /* Comprobando formato de las imagenes */
-    if(mime_content_type($_FILES['producto_foto']['tmp_name'])!="image/jpeg" && mime_content_type($_FILES['producto_foto']['tmp_name'])!="image/png"){
+    if(mime_content_type($_FILES['producto_foto']['tmp_name'])!="image/jpeg" && mime_content_type($_FILES['foto']['tmp_name'])!="image/png"){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -91,7 +91,7 @@
     }
 
     /* Nombre de la imagen */
-    $img_nombre=renombrar_fotos($datos['producto_nombre']);
+    $img_nombre=renombrar_fotos($datos['nombre_prod']);
 
     /* Nombre final de la imagen */
     $foto=$img_nombre.$img_ext;
@@ -109,16 +109,16 @@
 
 
     /* Eliminando la imagen anterior */
-    if(is_file($img_dir.$datos['producto_foto']) && $datos['producto_foto']!=$foto){
+    if(is_file($img_dir.$datos['foto']) && $datos['foto']!=$foto){
 
-        chmod($img_dir.$datos['producto_foto'], 0777);
-        unlink($img_dir.$datos['producto_foto']);
+        chmod($img_dir.$datos['foto'], 0777);
+        unlink($img_dir.$datos['foto']);
     }
 
 
     /*== Actualizando datos ==*/
     $actualizar_producto=conexion();
-    $actualizar_producto=$actualizar_producto->prepare("UPDATE producto SET producto_foto=:foto WHERE producto_id=:id");
+    $actualizar_producto=$actualizar_producto->prepare("UPDATE PRODUCTO SET foto=:foto WHERE id_producto=:id");
 
     $marcadores=[
         ":foto"=>$foto,

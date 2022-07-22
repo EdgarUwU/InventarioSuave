@@ -12,8 +12,8 @@
 		$id = (isset($_GET['product_id_up'])) ? $_GET['product_id_up'] : 0;
 
 		/*== Verificando producto ==*/
-    	$check_producto=conexion();
-    	$check_producto=$check_producto->query("SELECT * FROM producto WHERE producto_id='$id'");
+    	$check_producto=conexion2();
+    	$check_producto=$check_producto->query("SELECT * FROM PRODUCTO WHERE id_producto='$id'");
 
         if($check_producto->rowCount()>0){
         	$datos=$check_producto->fetch();
@@ -23,13 +23,13 @@
 
 	<div class="columns">
 		<div class="column is-two-fifths">
-			<?php if(is_file("./img/producto/".$datos['producto_foto'])){ ?>
+			<?php if(is_file("./img/producto/".$datos['foto'])){ ?>
 			<figure class="image mb-6">
-			  	<img src="./img/producto/<?php echo $datos['producto_foto']; ?>">
+			  	<img src="./img/producto/<?php echo $datos['foto']; ?>">
 			</figure>
 			<form class="FormularioAjax" action="./php/producto_img_eliminar.php" method="POST" autocomplete="off" >
 
-				<input type="hidden" name="img_del_id" value="<?php echo $datos['producto_id']; ?>">
+				<input type="hidden" name="img_del_id" value="<?php echo $datos['id_producto']; ?>">
 
 				<p class="has-text-centered">
 					<button type="submit" class="button is-danger is-rounded">Eliminar imagen</button>
@@ -44,11 +44,11 @@
 		<div class="column">
 			<form class="mb-6 has-text-centered FormularioAjax" action="./php/producto_img_actualizar.php" method="POST" enctype="multipart/form-data" autocomplete="off" >
 
-				<h4 class="title is-4 mb-6"><?php echo $datos['producto_nombre']; ?></h4>
+				<h4 class="title is-4 mb-6"><?php echo $datos['nombre_prod']; ?></h4>
 				
 				<label>Foto o imagen del producto</label><br>
 
-				<input type="hidden" name="img_up_id" value="<?php echo $datos['producto_id']; ?>">
+				<input type="hidden" name="img_up_id" value="<?php echo $datos['id_producto']; ?>">
 
 				<div class="file has-name is-horizontal is-justify-content-center mb-6">
 				  	<label class="file-label">

@@ -22,6 +22,7 @@
                     <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
                     <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
                     <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
+                    <a href="index.php?vista=user_recover" class="navbar-item">Recuperar Usuarios</a>
                 </div>
             </div>
 

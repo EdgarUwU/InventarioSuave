@@ -7,11 +7,12 @@
 	$nombre=limpiar_cadena($_POST['producto_nombre']);
 	$precio=limpiar_cadena($_POST['producto_precio']);
 	$marca=limpiar_cadena($_POST['producto_marca']);
+    $stock=limpiar_cadena($_POST['producto_stock']);
 	$descripcion=limpiar_cadena($_POST['producto_descripcion']);
 
 
 	/*== Verificando campos obligatorios ==*/
-    if($nombre=="" || $precio=="" || $marca=="" || $descripcion==""){
+    if($nombre=="" || $precio=="" || $marca=="" || $stock=="" || $descripcion==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -39,6 +40,15 @@
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
                 El PRECIO no coincide con el formato solicitado
+            </div>
+        ';
+        exit();
+    }
+    if(verificar_datos("[0-9.]{1,25}",$stock)){
+        echo '
+            <div class="notification is-danger is-light">
+                <strong>¡Ocurrio un error inesperado!</strong><br>
+                El stock no coincide con el formato solicitado
             </div>
         ';
         exit();
@@ -159,12 +169,13 @@
 
 	/*== Guardando datos ==*/
     $guardar_producto=conexion();
-    $guardar_producto=$guardar_producto->prepare("INSERT INTO PRODUCTO (nombre_prod,marca,presentacion,precio,created_by,foto) 
-                                                VALUES(:nombre,:marca,:presentacion,:precio,:created_by,:foto)");
+    $guardar_producto=$guardar_producto->prepare("INSERT INTO PRODUCTO (nombre_prod,marca,stock,presentacion,precio,created_by,foto) 
+                                                VALUES(:nombre,:marca,:stock,:presentacion,:precio,:created_by,:foto)");
 
     $marcadores=[
         ":nombre"=>$nombre,
         ":marca"=>$marca,
+        ":stock"=>$stock,
         ":presentacion"=>$descripcion,
         ":precio"=>$precio,
         ":foto"=>$foto,

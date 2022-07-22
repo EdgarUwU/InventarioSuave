@@ -26,6 +26,12 @@
 				  	<input class="input" type="text" name="producto_precio" pattern="[0-9.]{1,25}" maxlength="25" required >
 				</div>
 		  	</div>
+			  <div class="column">
+		    	<div class="control">
+					<label>Stock</label>
+				  	<input class="input" type="text" name="producto_stock" pattern="[0-9.]{1,25}" maxlength="25" required >
+				</div>
+		  	</div>
 		  	<div class="column">
 			  <div class="control">
 					<label>Marca</label>

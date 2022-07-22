@@ -11,8 +11,8 @@
 		$id = (isset($_GET['product_id_up'])) ? $_GET['product_id_up'] : 0;
 
 		/*== Verificando producto ==*/
-    	$check_producto=conexion();
-    	$check_producto=$check_producto->query("SELECT * FROM producto WHERE producto_id='$id'");
+    	$check_producto=conexion2();
+    	$check_producto=$check_producto->query("SELECT * FROM PRODUCTO WHERE id_producto='$id'");
 
         if($check_producto->rowCount()>0){
         	$datos=$check_producto->fetch();
@@ -20,23 +20,19 @@
 
 	<div class="form-rest mb-6 mt-6"></div>
 	
-	<h2 class="title has-text-centered"><?php echo $datos['producto_nombre']; ?></h2>
+	<h2 class="title has-text-centered"><?php echo $datos['nombre_prod']; ?></h2>
+	<center><img src="./img/producto/<?php echo $datos['foto']; ?>" class="image center" width="200px" height="auto" style="align-items: center;"></center>
 
 	<form action="./php/producto_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off" >
 
-		<input type="hidden" name="producto_id" value="<?php echo $datos['producto_id']; ?>" required >
+		<input type="hidden" name="id_producto" value="<?php echo $datos['id_producto']; ?>" required >
 
+		<form action="./php/producto_guardar.php" method="POST" class="FormularioAjax" autocomplete="off" enctype="multipart/form-data" >
 		<div class="columns">
 		  	<div class="column">
 		    	<div class="control">
-					<label>Código de barra</label>
-				  	<input class="input" type="text" name="producto_codigo" pattern="[a-zA-Z0-9- ]{1,70}" maxlength="70" required value="<?php echo $datos['producto_codigo']; ?>" >
-				</div>
-		  	</div>
-		  	<div class="column">
-		    	<div class="control">
 					<label>Nombre</label>
-				  	<input class="input" type="text" name="producto_nombre" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required value="<?php echo $datos['producto_nombre']; ?>" >
+				  	<input class="input" type="text" name="producto_nombre" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required value="<?php echo $datos['nombre_prod']; ?> ">
 				</div>
 		  	</div>
 		</div>
@@ -44,35 +40,25 @@
 		  	<div class="column">
 		    	<div class="control">
 					<label>Precio</label>
-				  	<input class="input" type="text" name="producto_precio" pattern="[0-9.]{1,25}" maxlength="25" required value="<?php echo $datos['producto_precio']; ?>" >
+				  	<input class="input" type="text" name="producto_precio" pattern="[0-9.]{1,25}" maxlength="25" required value="<?php echo $datos['precio']; ?>">
 				</div>
 		  	</div>
-		  	<div class="column">
+			  <div class="column">
 		    	<div class="control">
 					<label>Stock</label>
-				  	<input class="input" type="text" name="producto_stock" pattern="[0-9]{1,25}" maxlength="25" required value="<?php echo $datos['producto_stock']; ?>" >
+				  	<input class="input" type="text" name="producto_stock" pattern="[0-9.]{1,25}" maxlength="25" required value="<?php echo $datos['stock']; ?>">
 				</div>
 		  	</div>
 		  	<div class="column">
-				<label>Categoría</label><br>
-		    	<div class="select is-rounded">
-				  	<select name="producto_categoria" >
-				    	<?php
-    						$categorias=conexion();
-    						$categorias=$categorias->query("SELECT * FROM categoria");
-    						if($categorias->rowCount()>0){
-    							$categorias=$categorias->fetchAll();
-    							foreach($categorias as $row){
-    								if($datos['categoria_id']==$row['categoria_id']){
-    									echo '<option value="'.$row['categoria_id'].'" selected="" >'.$row['categoria_nombre'].' (Actual)</option>';
-    								}else{
-    									echo '<option value="'.$row['categoria_id'].'" >'.$row['categoria_nombre'].'</option>';
-    								}
-				    			}
-				   			}
-				   			$categorias=null;
-				    	?>
-				  	</select>
+			  <div class="control">
+					<label>Marca</label>
+				  	<input class="input" type="text" name="producto_marca" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required value="<?php echo $datos['marca']; ?>">
+				</div>
+		  	</div>
+		  	<div class="column">
+				<div class="control">
+					<labes>Descripción</labes>
+				  	<textarea class="textarea" name="producto_descripcion" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,500}" maxlength="500" required value="<?php echo $datos['presentacion']; ?>"></textarea>
 				</div>
 		  	</div>
 		</div>
