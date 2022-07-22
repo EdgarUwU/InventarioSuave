@@ -2,29 +2,23 @@
 	$inicio = ($pagina>0) ? (($pagina * $registros)-$registros) : 0;
 	$tabla="";
 
-	$campos="producto.producto_id,producto.producto_codigo,producto.producto_nombre,producto.producto_precio,producto.producto_stock,producto.producto_foto,producto.categoria_id,producto.usuario_id,categoria.categoria_id,categoria.categoria_nombre,usuario.usuario_id,usuario.usuario_nombre,usuario.usuario_apellido";
+	$campos="id_producto,nombre_prod,stock,marca,presentacion,precio,foto";
 
 	if(isset($busqueda) && $busqueda!=""){
 
-		$consulta_datos="SELECT $campos FROM producto INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id WHERE producto.producto_codigo LIKE '%$busqueda%' OR producto.producto_nombre LIKE '%$busqueda%' ORDER BY producto.producto_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT $campos FROM PRODUCTO INNER JOIN INVENTARIO ON PRODUCTO.id_producto=INVENTARIO.id_producto LIKE '%$busqueda%' OR PRODUCTO.nombre_prod LIKE '%$busqueda%' ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(producto_id) FROM producto WHERE producto_codigo LIKE '%$busqueda%' OR producto_nombre LIKE '%$busqueda%'";
-
-	}elseif($categoria_id>0){
-
-		$consulta_datos="SELECT $campos FROM producto INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id WHERE producto.categoria_id='$categoria_id' ORDER BY producto.producto_nombre ASC LIMIT $inicio,$registros";
-
-		$consulta_total="SELECT COUNT(producto_id) FROM producto WHERE categoria_id='$categoria_id'";
+		$consulta_total="SELECT COUNT(id_producto) FROM PRODUCTO WHERE marca LIKE '%$busqueda%' OR nombre_prod LIKE '%$busqueda%'";
 
 	}else{
 
-		$consulta_datos="SELECT $campos FROM producto INNER JOIN categoria ON producto.categoria_id=categoria.categoria_id INNER JOIN usuario ON producto.usuario_id=usuario.usuario_id ORDER BY producto.producto_nombre ASC LIMIT $inicio,$registros";
+		$consulta_datos="SELECT $campos FROM PRODUCTO INNER JOIN INVENTARIO ON PRODUCTO.id_producto=INVENTARIO.id_producto ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
 
-		$consulta_total="SELECT COUNT(producto_id) FROM producto";
+		$consulta_total="SELECT COUNT(id_producto) FROM PRODUCTO";
 
 	}
 
-	$conexion=conexion();
+	$conexion=conexion2();
 
 	$datos = $conexion->query($consulta_datos);
 	$datos = $datos->fetchAll();

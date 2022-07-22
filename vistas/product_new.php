@@ -27,28 +27,9 @@
 				</div>
 		  	</div>
 		  	<div class="column">
-		    	<div class="control">
-					<label>Stock</label>
-				  	<input class="input" type="text" name="producto_stock" pattern="[0-9]{1,25}" maxlength="25" required >
-				</div>
-		  	</div>
-		  	<div class="column">
-				<label>Marca</label><br>
-		    	<div class="select is-rounded">
-				  	<select name="producto_categoria" >
-				    	<option value="" selected="" >Seleccione una opción</option>
-				    	<?php
-    						$categorias=conexion();
-    						$categorias=$categorias->query("SELECT * FROM categoria");
-    						if($categorias->rowCount()>0){
-    							$categorias=$categorias->fetchAll();
-    							foreach($categorias as $row){
-    								echo '<option value="'.$row['categoria_id'].'" >'.$row['categoria_nombre'].'</option>';
-				    			}
-				   			}
-				   			$categorias=null;
-				    	?>
-				  	</select>
+			  <div class="control">
+					<label>Marca</label>
+				  	<input class="input" type="text" name="producto_marca" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required >
 				</div>
 		  	</div>
 		  	<div class="column">

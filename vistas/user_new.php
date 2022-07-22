@@ -58,8 +58,8 @@
 					<select name="permiso_usuario">
 						<option value="" selected="">Seleccione una opción</option>
 						<option value="1">Administrador</option>
-						<option value="2">Usuario</option>
-						<option value="3">Auditor</option>
+						<option value="3">Normal</option>
+						<option value="2">Auditor</option>
 					</select>
 				</div>
 			</div>

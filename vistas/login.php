@@ -23,7 +23,7 @@
 		</p>
 
 		<?php
-			if(isset($_POST['login_usuario']) && isset($_POST['login_clave'])){
+			if(isset($_POST['username']) && isset($_POST['contrasena'])){
 				require_once "./php/main.php";
 				require_once "./php/iniciar_sesion.php";
 			}
