@@ -2,16 +2,18 @@
 $inicio = ($pagina > 0) ? (($pagina * $registros) - $registros) : 0;
 $tabla = "";
 
-$campos = "id_producto,nombre_prod,marca,stock,precio,presentacion,foto,deleted";
 
 if (isset($busqueda) && $busqueda != "") {
 
-	$consulta_datos = "SELECT $campos FROM PRODUCTO WHERE deleted='0' AND nombre_prod LIKE '%$busqueda%' OR marca LIKE '%$busqueda%' OR presentacion LIKE '%$busqueda%' ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
+	$consulta_datos = "SELECT id_producto,nombre_prod,marca,precio,presentacion,foto,deleted 
+	FROM PRODUCTO WHERE deleted='0' AND nombre_prod LIKE '%$busqueda%' OR marca LIKE '%$busqueda%' 
+	OR presentacion LIKE '%$busqueda%' ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
 
 	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0' AND marca LIKE '%$busqueda%' OR nombre_prod LIKE '%$busqueda%' OR presentacion LIKE '%$busqueda%' ";
 } else {
 
-	$consulta_datos = "SELECT $campos FROM PRODUCTO WHERE deleted='0' ORDER BY nombre_prod ASC LIMIT $inicio,$registros";
+	$consulta_datos = "SELECT id_producto,nombre_prod,marca,precio,presentacion,foto,deleted 
+	FROM PRODUCTO WHERE deleted='0' ORDER BY nombre_prod ASC LIMIT $inicio,$registros";
 
 	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0'";
 }
@@ -45,7 +47,9 @@ if ($total >= 1 && $pagina <= $Npaginas) {
 			            <div class="content">
 			              <p>
 			                <strong>' . $contador . ' - ' . $rows['nombre_prod'] . '</strong><br>
-			                <strong>Precio:</strong> $' . $rows['precio'] . ', <strong>Marca:</strong> ' . $rows['marca'] .',  <strong>Stock:</strong> ' . $rows['stock'] . ' , <strong>Descripción:</strong> ' . $rows['presentacion'] . '
+			                <strong>Precio:</strong> $' . $rows['precio'] . ', 
+							<strong>Marca:</strong> ' . $rows['marca'] . ', 
+							<strong>Descripción:</strong> ' . $rows['presentacion'] . '
 			              </p>
 			            </div>
 			            <div class="has-text-right">
