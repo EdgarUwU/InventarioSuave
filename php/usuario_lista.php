@@ -51,7 +51,7 @@
 		foreach($datos as $rows){
 			$tabla.='
 				<tr class="has-text-centered" >
-					<td>'.$rows['Foto'].'</td>
+					<td>'.$rows['foto'].'</td>
                     <td>'.$rows['nombre'].'</td>
                     <td>'.$rows['apellido_pat'].'</td>
 					<td>'.$rows['apellido_mat'].'</td>

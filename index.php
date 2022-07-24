@@ -19,12 +19,21 @@
                     include "./vistas/logout.php";
                     exit();
                 }
-
-                include "./inc/navbar.php";
-
-                include "./vistas/".$_GET['vista'].".php";
-
-                include "./inc/script.php";
+                if(isset($_SESSION['privilegios']) && $_SESSION['privilegios']=="administrador"){
+                    include "./inc/navbar_admin.php";
+                    include "./vistas/".$_GET['vista'].".php";
+                    include "./inc/script.php";
+                }
+                if(isset($_SESSION['privilegios']) && $_SESSION['privilegios']=="normal"){
+                    include "./inc/navbar.php";
+                    include "./vistas/".$_GET['vista'].".php";
+                    include "./inc/script.php";
+                }
+                if(isset($_SESSION['privilegios']) && $_SESSION['privilegios']=="auditoria"){
+                    include "./inc/navbar_auditor.php";
+                    include "./vistas/".$_GET['vista'].".php";
+                    include "./inc/script.php";
+                }
                 
 
             }else{

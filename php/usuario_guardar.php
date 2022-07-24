@@ -13,7 +13,7 @@
     $contrasena_1=limpiar_cadena($_POST['contrasena']);
     $contrasena_2=limpiar_cadena($_POST['contrasena2']);
     $permiso=limpiar_cadena($_POST['permiso_usuario']);
-    $create_by=limpiar_cadena($_SESSION['nombre']." ".$_SESSION['apellido_pat']);
+    $create_by=limpiar_cadena($_SESSION['id']);
     $ip=limpiar_cadena($_SERVER['REMOTE_ADDR']);
 
 

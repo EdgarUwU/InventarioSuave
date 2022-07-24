@@ -42,9 +42,6 @@
 				<div class="control">
 					<labes>Descripción</labes>
 				  	<textarea class="textarea" name="producto_descripcion" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,500}" maxlength="500" required ></textarea>
-					<script>
-						CKEDITOR.replace('producto_descripcion');
-					</script>
 				</div>
 		  	</div>
 		</div>
