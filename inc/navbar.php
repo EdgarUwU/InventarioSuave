@@ -21,7 +21,6 @@
                 <div class="navbar-dropdown">
                     <a href="index.php?vista=category_list" class="navbar-item">Lista</a>
                     <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=category_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
 
@@ -30,7 +29,6 @@
 
                 <div class="navbar-dropdown">
                     <a href="index.php?vista=product_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=product_search" class="navbar-item">Buscar</a>
                 </div>
             </div>
 

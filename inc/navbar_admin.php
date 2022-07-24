@@ -21,7 +21,6 @@
                 <div class="navbar-dropdown">
                     <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
                     <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=user_search" class="navbar-item">Buscar</a>
                     <a href="index.php?vista=user_recover" class="navbar-item">Recuperar Usuarios</a>
                 </div>
             </div>
@@ -30,9 +29,7 @@
                 <a class="navbar-link">Movimientos</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=category_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
-                    <a href="index.php?vista=category_search" class="navbar-item">Buscar</a>
+
                 </div>
             </div>
 
@@ -41,7 +38,7 @@
 
                 <div class="navbar-dropdown">
                     <a href="index.php?vista=product_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=product_search" class="navbar-item">Buscar</a>
+                    <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
                 </div>
             </div>
 
