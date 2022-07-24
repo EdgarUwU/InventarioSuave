@@ -17,9 +17,6 @@ CREATE TABLE IF NOT EXISTS `maquillaje_inventario`.`PRODUCTO` (
   INDEX `idx_marca` (`marca` ASC))
 ENGINE = InnoDB;
 
-INSERT INTO USUARIOS
-  (nombre_prod,marca,presentacion,precio,) 
-  VALUES ('Labial','Clarins','Mate','250');
 
 CREATE TABLE IF NOT EXISTS `maquillaje_inventario`.`INVENTARIO` (
   `id_inventario` SMALLINT AUTO_INCREMENT,
@@ -40,9 +37,6 @@ CREATE TABLE IF NOT EXISTS `maquillaje_inventario`.`INVENTARIO` (
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
 
-INSERT INTO USUARIOS
-  (stock) 
-  VALUES'100');
 
 CREATE TABLE IF NOT EXISTS `maquillaje_inventario`.`MOVIMIENTO` (
   `id_movimiento` SMALLINT AUTO_INCREMENT,
@@ -67,9 +61,6 @@ CREATE TABLE IF NOT EXISTS `maquillaje_inventario`.`MOVIMIENTO` (
     ON UPDATE RESTRICT)
 ENGINE = InnoDB;
 
-INSERT INTO USUARIOS
-  (tipo,cantidad,fecha,descripcion) 
-  VALUES ('venta','2','2022-06-29','Se realizo una venta de 5 labiales');
 
 CREATE TABLE IF NOT EXISTS `maquillaje_inventario`.`USUARIOS` (
   `id_usuario` INT AUTO_INCREMENT,
@@ -88,7 +79,8 @@ CREATE TABLE IF NOT EXISTS `maquillaje_inventario`.`USUARIOS` (
   INDEX `idx_nombre` (`nombre` ASC, `apellido_pat` ASC, `apellido_mat` ASC))
 ENGINE = InnoDB;
 
-use maquillaje_inventario;
+USE maquillaje_inventario;
+
 SELECT * FROM maquillaje_inventario.USUARIOS;
 INSERT INTO `USUARIOS` (`username`,nombre, `apellido_pat`, `apellido_mat`, `contrasena`, `create_by`,ip,privilegios) VALUES
 ('Administrador', 'Edgar', 'Escobedo','Nevárez', '$2y$10$EPY9LSLOFLDDBriuJICmFOqmZdnDXxLJG8YFbog5LcExp77DBQvgC', '1','192.168.127.66','1');
