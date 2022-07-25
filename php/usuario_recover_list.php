@@ -17,78 +17,65 @@
 
 	$Npaginas =ceil($total/$registros);
 
-	$tabla.='
-	<div class="table-container">
-        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
-            <thead>
-                <tr class="has-text-centered">
-					<th>Foto</th>
-                    <th>Nombres</th>
-                    <th>Apellido Paterno</th>
-					<th>Apellido Materno</th>
-                    <th>Username</th>
-					<th>Privilegios</th>
-                    <th colspan="2">Opciones</th>
-                </tr>
-            </thead>
-            <tbody>
-	';
-
-	if($total>=1 && $pagina<=$Npaginas){
-		$contador=$inicio+1;
-		$pag_inicio=$inicio+1;
-		foreach($datos as $rows){
-			$tabla.='
-				<tr class="has-text-centered" >
-					<td>'.$rows['Foto'].'</td>
-                    <td>'.$rows['nombre'].'</td>
-                    <td>'.$rows['apellido_pat'].'</td>
-					<td>'.$rows['apellido_mat'].'</td>
-                    <td>'.$rows['username'].'</td>
-					<td>'.$rows['privilegios'].'</td>
-                    <td>
-                        <a href="index.php?vista=user_recover_update&user_id_up='.$rows['id_usuario'].'" class="button is-success is-rounded is-small">Recuperar</a>
-                    </td>
-                    <td>
-                        <a href="'.$url.$pagina.'&user_id_del='.$rows['id_usuario'].'" class="button is-danger is-rounded is-small">Eliminar Perma</a>
-                    </td>
-                </tr>
-            ';
-            $contador++;
+	if ($total >= 1 && $pagina <= $Npaginas) {
+		$contador = $inicio + 1;
+		$pag_inicio = $inicio + 1;
+		foreach ($datos as $rows) {
+			$tabla .= '
+					<article class="media">
+						<figure class="media-left">
+							<p class="image is-64x64">';
+			if (is_file("./img/user/" . $rows['foto'])) {
+				$tabla .= '<img src="./img/user/' . $rows['foto'] . '">';
+			} else {
+				$tabla .= '<img src="./img/user/user_default.jpg">';
+			}
+			$tabla .= '</p>
+						</figure>
+						<div class="media-content">
+							<div class="content">
+							  <p>
+								<strong>' . $contador . ' - ' . $rows['nombre'] . ' ' . $rows['apellido_pat'] . ' ' . $rows['apellido_mat'] . '</strong><br>
+								<strong>Privilegio:</strong> ' . $rows['privilegios'] . '
+	
+							  </p>
+							</div>
+							<div class="has-text-right">
+								<a href="index.php?vista=user_update&user_id_up='.$rows['id_usuario'].'" class="button is-success is-rounded is-small">Actualizar</a>
+								<a href="'.$url.$pagina.'&user_id_del='.$rows['id_usuario'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+							</div>
+						</div>
+					</article>
+	
+					<hr>
+				';
+			$contador++;
 		}
-		$pag_final=$contador-1;
-	}else{
-		if($total>=1){
-			$tabla.='
-				<tr class="has-text-centered" >
-					<td colspan="7">
-						<a href="'.$url.'1" class="button is-link is-rounded is-small mt-4 mb-4">
-							Haz clic para recargar el listado
+		$pag_final = $contador - 1;
+	} else {
+		if ($total >= 1) {
+			$tabla .= '
+					<p class="has-text-centered" >
+						<a href="' . $url . '1" class="button is-link is-rounded is-small mt-4 mb-4">
+							Haga clic aqui para recargar el listado
 						</a>
-					</td>
-				</tr>
-			';
-		}else{
-			$tabla.='
-				<tr class="has-text-centered" >
-					<td colspan="7">
-						No hay registros en el sistema
-					</td>
-				</tr>
-			';
+					</p>
+				';
+		} else {
+			$tabla .= '
+					<p class="has-text-centered" >No hay registros en el sistema</p>
+				';
 		}
 	}
-
-
-	$tabla.='</tbody></table></div>';
-
-	if($total>0 && $pagina<=$Npaginas){
-		$tabla.='<p class="has-text-right">Mostrando usuarios <strong>'.$pag_inicio.'</strong> al <strong>'.$pag_final.'</strong> de un <strong>total de '.$total.'</strong></p>';
+	
+	if ($total > 0 && $pagina <= $Npaginas) {
+		$tabla .= '<p class="has-text-right">Mostrando productos <strong>' . $pag_inicio . '</strong> al <strong>' . $pag_final . '</strong> de un <strong>total de ' . $total . '</strong></p>';
 	}
-
-	$conexion=null;
+	
+	$conexion = null;
 	echo $tabla;
-
-	if($total>=1 && $pagina<=$Npaginas){
-		echo paginador_tablas($pagina,$Npaginas,$url,7);
+	
+	if ($total >= 1 && $pagina <= $Npaginas) {
+		echo paginador_tablas($pagina, $Npaginas, $url, 7);
 	}
+	
