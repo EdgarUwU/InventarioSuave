@@ -14,8 +14,7 @@
 	    	$eliminar_usuario=conexion();
 	    	$eliminar_usuario=$eliminar_usuario->prepare("DELETE FROM USUARIOS WHERE id_usuario= :id");
 			$marcadores=[
-				":id"=>$user_id_del,
-				":deleted"=>"1"
+				":id"=>$user_id_del
 			];
 
 	    	$eliminar_usuario->execute(($marcadores));
