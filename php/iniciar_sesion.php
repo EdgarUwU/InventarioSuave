@@ -74,12 +74,19 @@ if ($check_user->rowCount() == 1) {
             echo "<script> window.location.href='index.php?vista=home'; </script>";
         } else {
             header("Location: index.php?vista=home");
+            $login_count=conexion();
+            $login_count=$login_count->prepare("UPDATE USUARIOS set login_count=login_count+1 
+                                                where id_usuario=:id_usuario");
+                $marcadores=[
+                    ':id_usuario'=>$_SESSION['id']
+                ];
+                $login_count->execute($marcadores);
         }
     } else {
         echo '
 	            <div class="notification is-danger is-light">
 	                <strong>¡Ocurrio un error inesperado!</strong><br>
-	                username o contraseña incorrectos
+	                Usuario o contraseña incorrectos
 	            </div>
 	        ';
     }
