@@ -2,10 +2,24 @@
 	$inicio = ($pagina>0) ? (($pagina * $registros)-$registros) : 0;
 	$tabla="";
 
-		$consulta_datos="SELECT * FROM USUARIOS WHERE id_usuario!='".$_SESSION['id']."' AND deleted='1' ORDER BY nombre ASC LIMIT $inicio,$registros";
+	if (isset($busqueda) && $busqueda != "") {
 
-		$consulta_total="SELECT COUNT(id_usuario) FROM USUARIOS WHERE id_usuario!='".$_SESSION['id']."'  AND deleted='1'";
-		
+		$consulta_datos = "SELECT * FROM USUARIOS WHERE ((id_usuario!='" . $_SESSION['id'] . "') 
+			AND deleted = '1' AND (nombre LIKE '%$busqueda%' OR apellido_pat LIKE '%$busqueda%' 
+			OR username LIKE '%$busqueda%' OR apellido_mat LIKE '%$busqueda%')) 
+			ORDER BY nombre ASC LIMIT $inicio,$registros";
+	
+		$consulta_total = "SELECT COUNT(id_usuario) FROM USUARIOS WHERE ((id_usuario!='" 
+		. $_SESSION['id'] . "') AND deleted = '1' AND (nombre LIKE '%$busqueda%' OR apellido_pat LIKE 
+		'%$busqueda%' OR username LIKE '%$busqueda%' OR apellido_mat LIKE '%$busqueda%'))";
+	} else {
+	
+		$consulta_datos = "SELECT * FROM USUARIOS WHERE id_usuario!='" . $_SESSION['id'] 
+		. "' AND deleted='1' ORDER BY nombre ASC LIMIT $inicio,$registros";
+	
+		$consulta_total = "SELECT COUNT(id_usuario) FROM USUARIOS WHERE id_usuario!='" 
+		. $_SESSION['id'] . "'  AND deleted='1'";
+	}
 
 	$conexion=conexion2();
 

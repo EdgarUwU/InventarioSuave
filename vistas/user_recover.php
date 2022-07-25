@@ -11,12 +11,12 @@
             require_once "./php/buscador.php";
         }
 
-        if(!isset($_SESSION['busqueda_usuario']) && empty($_SESSION['busqueda_usuario'])){
+        if(!isset($_SESSION['busqueda_usuario_recover']) && empty($_SESSION['busqueda_usuario_recover'])){
     ?>
     <div class="columns">
         <div class="column">
             <form action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="usuario">   
+                <input type="hidden" name="modulo_buscador" value="usuario_recover">   
                 <div class="field is-grouped">
                     <p class="control is-expanded">
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
@@ -32,9 +32,9 @@
     <div class="columns">
         <div class="column">
             <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="usuario"> 
-                <input type="hidden" name="eliminar_buscador" value="usuario">
-                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_usuario']; ?>”</strong></p>
+                <input type="hidden" name="modulo_buscador" value="usuario_recover"> 
+                <input type="hidden" name="eliminar_buscador" value="usuario_recover">
+                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_usuario_recover']; ?>”</strong></p>
                 <br>
                 <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>
             </form>
@@ -43,7 +43,7 @@
     <?php
             # Eliminar usuario #
             if(isset($_GET['user_id_del'])){
-                require_once "./php/usuario_eliminar.php";
+                require_once "./php/usuario_perma.php";
             }
 
             if(!isset($_GET['page'])){
@@ -56,12 +56,12 @@
             }
 
             $pagina=limpiar_cadena($pagina);
-            $url="index.php?vista=user_search&page="; /* <== */
-            $registros=15;
-            $busqueda=$_SESSION['busqueda_usuario']; /* <== */
+            $url="index.php?vista=user_recover&page="; /* <== */
+            $registros=8;
+            $busqueda=$_SESSION['busqueda_usuario_recover']; /* <== */
 
             # Paginador usuario #
-            require_once "./php/usuario_lista.php";
+            require_once "./php/usuario_recover_list.php";
         } 
     ?>
 </div>
@@ -85,7 +85,7 @@
         }
 
         $pagina=limpiar_cadena($pagina);
-        $url="index.php?vista=user_list&page=";
+        $url="index.php?vista=user_recover&page=";
         $registros=8;
         $busqueda="";
 

@@ -55,8 +55,8 @@
             }
 
             $pagina=limpiar_cadena($pagina);
-            $url="index.php?vista=user_search&page="; /* <== */
-            $registros=15;
+            $url="index.php?vista=user_list&page="; /* <== */
+            $registros=8;
             $busqueda=$_SESSION['busqueda_usuario']; /* <== */
 
             # Paginador usuario #

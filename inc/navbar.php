@@ -17,7 +17,7 @@
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">Movimientos</a>
-
+                <a href="index.php?vista=movimientos_list" class="navbar-item">Lista</a>
                 <div class="navbar-dropdown">
 
 

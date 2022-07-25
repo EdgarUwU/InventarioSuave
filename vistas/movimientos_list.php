@@ -1,9 +1,8 @@
 <div class="container is-fluid mb-6">
-    <h1 class="title">Usuarios</h1>
-    <h2 class="subtitle">Buscar usuario</h2>
+    <h1 class="title">Movimientos</h1>
+    <h2 class="subtitle">Lista de movimientos</h2>
 </div>
-
-<div class="container pb-6 pt-6">
+<div class="container pb-6">
     <?php
         require_once "./php/main.php";
 
@@ -11,7 +10,7 @@
             require_once "./php/buscador.php";
         }
 
-        if(!isset($_SESSION['busqueda_usuario']) && empty($_SESSION['busqueda_usuario'])){
+        if(!isset($_SESSION['movimiento_busqueda']) && empty($_SESSION['movimiento_busqueda'])){
     ?>
     <div class="columns">
         <div class="column">
@@ -42,8 +41,8 @@
     </div>
     <?php
             # Eliminar usuario #
-            if(isset($_GET['user_id_del'])){
-                require_once "./php/usuario_eliminar.php";
+            if(isset($_GET['movimiento_id_del'])){
+                require_once "./php/movimiento_eliminar.php";
             }
 
             if(!isset($_GET['page'])){
@@ -56,12 +55,40 @@
             }
 
             $pagina=limpiar_cadena($pagina);
-            $url="index.php?vista=user_search&page="; /* <== */
+            $url="index.php?vista=movimiento_list&page="; /* <== */
             $registros=15;
-            $busqueda=$_SESSION['busqueda_usuario']; /* <== */
+            $busqueda=$_SESSION['busqueda_movimiento']; /* <== */
 
             # Paginador usuario #
-            require_once "./php/usuario_lista.php";
+            require_once "./php/movimiento_lista.php";
         } 
+    ?>
+</div>
+
+<div class="container pt-4">  
+    <?php
+        require_once "./php/main.php";
+
+        # Eliminar usuario #
+        if(isset($_GET['user_id_del'])){
+            require_once "./php/movimiento_eliminar.php";
+        }
+
+        if(!isset($_GET['page'])){
+            $pagina=1;
+        }else{
+            $pagina=(int) $_GET['page'];
+            if($pagina<=1){
+                $pagina=1;
+            }
+        }
+
+        $pagina=limpiar_cadena($pagina);
+        $url="index.php?vista=movimiento_list&page=";
+        $registros=8;
+        $busqueda="";
+
+        # Paginador usuario #
+        require_once "./php/movimiento_lista.php";
     ?>
 </div>

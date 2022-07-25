@@ -50,9 +50,9 @@ if ($total >= 1 && $pagina <= $Npaginas) {
 			            <div class="content">
 			              <p>
 			                <strong>' . $contador . ' - ' . $rows['nombre_prod'] . '</strong><br>
-			                <strong>Precio:</strong> $' . $rows['precio'] . ', 
-							<strong>Marca:</strong> ' . $rows['marca'] . ', 
-							<strong>Marca:</strong> ' . $rows['stock'] . ', 
+			                <strong>Precio:</strong> $' . $rows['precio'] . ' 
+							<strong>Marca:</strong> ' . $rows['marca'] . '
+							<strong>Stock:</strong> ' . $rows['stock'] . '
 							<strong>Descripción:</strong> ' . $rows['presentacion'] . '
 			              </p>
 			            </div>
