@@ -37,6 +37,20 @@ if (verificar_datos("[a-zA-Z0-9$@.-]{7,100}", $contrasena)) {
     exit();
 }
 
+if (getenv('HTTP_CLIENT_IP')) {
+    $ip = getenv('HTTP_CLIENT_IP');
+} elseif (getenv('HTTP_X_FORWARDED_FOR')) {
+    $ip = getenv('HTTP_X_FORWARDED_FOR');
+} elseif (getenv('HTTP_X_FORWARDED')) {
+    $ip = getenv('HTTP_X_FORWARDED');
+} elseif (getenv('HTTP_FORWARDED_FOR')) {
+    $ip = getenv('HTTP_FORWARDED_FOR');
+} elseif (getenv('HTTP_FORWARDED')) {
+    $ip = getenv('HTTP_FORWARDED');
+} else {
+    $ip = $_SERVER['REMOTE_ADDR'];
+}
+
 
 $check_user = conexion2();
 $check_user = $check_user->query("SELECT * FROM USUARIOS WHERE username = '$username'");
@@ -52,6 +66,7 @@ if ($check_user->rowCount() == 1) {
         $_SESSION['apellido_pat'] = $check_user['apellido_pat'];
         $_SESSION['apellido_mat'] = $check_user['apellido_mat'];
         $_SESSION['privilegios'] = $check_user['privilegios'];
+        $_SESSION['ip'] = $ip;
 
 
 

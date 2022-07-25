@@ -14,7 +14,6 @@
     $contrasena_2=limpiar_cadena($_POST['contrasena2']);
     $permiso=limpiar_cadena($_POST['permiso_usuario']);
     $create_by=limpiar_cadena($_SESSION['id']);
-    $ip=limpiar_cadena($_SERVER['REMOTE_ADDR']);
 
 
     /*== Verificando campos obligatorios ==*/
@@ -105,7 +104,7 @@
         ":apellido_mat"=>$apellido_mat,
         ":contrasena"=>$contrasena,
         ":create_by"=>$create_by,
-        ":ip"=>$ip,
+        ":ip"=>$_SESSION['ip'],
         ":privilegios"=>$permiso
     ];
 

@@ -185,7 +185,8 @@ $check_id_prod = $check_id_prod->query("SELECT A.id_producto as 'id' FROM PRODUC
 $id_prod = $check_id_prod->fetch();
 
 $guardarstock = conexion();
-$guardarstock = $guardarstock->prepare("INSERT INTO INVENTARIO (stock,id_producto,create_by) VALUES(:stock,:id_prod,:create_by)");
+$guardarstock = $guardarstock->prepare("INSERT INTO INVENTARIO (stock,id_producto,create_by) 
+                                        VALUES(:stock,:id_prod,:create_by)");
 $marcadoresstock = [
     ":stock" => $stock,
     ":id_prod" => $id_prod['id'],
