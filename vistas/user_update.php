@@ -24,13 +24,20 @@
         	$datos=$check_usuario->fetch();
 	?>
 
-	<div class="form-rest mb-6 mt-6"></div>
+
+	<?php
+		if($datos['foto']!=""){
+			echo '<center><img src="./img/user/'.$datos['foto'].'" class="image center" width="200px" height="auto" style="align-items: center;"></center>';
+		}else{
+			echo '<center><img src="./img/user/user_default.jpg" class="image center" width="200px" height="auto" style="align-items: center;"></center>';
+		}
+	?>
 
 	<form action="./php/usuario_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off" >
 
 		<input type="hidden" name="id_usuario" value="<?php echo $datos['id_usuario']; ?>" required >
 		
-		<div class="columns">
+		<div class="columns pt-2">
 		  	<div class="column">
 		    	<div class="control">
 					<label>Nombres</label>
@@ -82,6 +89,8 @@
 			include "./inc/error_alert.php";
 		}
 		$check_usuario=null;
+		echo '<div style="margin-top: 50px">';
 		include "./inc/btn_back.php";
+		echo '</div>';
 	?>
 </div>

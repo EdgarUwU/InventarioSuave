@@ -35,7 +35,7 @@
         echo '
             <div class="notification is-info is-light">
                 <strong>¡USUARIO ACTUALIZADO!</strong><br>
-                El usuario se actualizo con exito
+                El usuario se recupero con exito
             </div>
         ';
     }else{

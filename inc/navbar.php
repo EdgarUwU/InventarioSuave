@@ -19,8 +19,8 @@
                 <a class="navbar-link">Movimientos</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=category_list" class="navbar-item">Lista</a>
-                    <a href="index.php?vista=product_new" class="navbar-item">Nuevo</a>
+
+
                 </div>
             </div>
 

@@ -41,8 +41,8 @@
 							  </p>
 							</div>
 							<div class="has-text-right">
-								<a href="index.php?vista=user_update&user_id_up='.$rows['id_usuario'].'" class="button is-success is-rounded is-small">Actualizar</a>
-								<a href="'.$url.$pagina.'&user_id_del='.$rows['id_usuario'].'" class="button is-danger is-rounded is-small">Eliminar</a>
+								<a href="index.php?vista=user_recover_update&user_id_up='.$rows['id_usuario'].'" class="button is-success is-rounded is-small">Recuperar</a>
+								<a href="'.$url.$pagina.'&user_id_del='.$rows['id_usuario'].'" class="button is-danger is-rounded is-small">Eliminar Pá siempre</a>
 							</div>
 						</div>
 					</article>
