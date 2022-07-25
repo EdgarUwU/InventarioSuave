@@ -6,8 +6,8 @@ $tabla = "";
 if (isset($busqueda) && $busqueda != "") {
 
 	$consulta_datos = "SELECT * FROM PRODUCTO,INVENTARIO 
-	where PRODUCTO.id_producto=INVENTARIO.id_producto AND deleted='0' deleted='0' AND nombre_prod LIKE '%$busqueda%' OR marca LIKE '%$busqueda%' 
-	OR presentacion LIKE '%$busqueda%' ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
+	where PRODUCTO.id_producto=INVENTARIO.id_producto AND deleted='0' AND (PRODUCTO.nombre_prod 
+	LIKE '%$busqueda%' OR PRODUCTO.presentacion LIKE '%$busqueda%') ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
 
 	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0' 
 	AND  nombre_prod LIKE '%$busqueda%' OR presentacion 
@@ -57,7 +57,6 @@ if ($total >= 1 && $pagina <= $Npaginas) {
 			              </p>
 			            </div>
 			            <div class="has-text-right">
-			                <a href="index.php?vista=product_img&product_id_up=' . $rows['id_producto'] . '" class="button is-link is-rounded is-small">Imagen</a>
 			                <a href="index.php?vista=product_update&product_id_up=' . $rows['id_producto'] . '" class="button is-success is-rounded is-small">Actualizar</a>
 			                <a href="' . $url . $pagina . '&product_id_del=' . $rows['id_producto'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
 			            </div>
