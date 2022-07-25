@@ -8,7 +8,7 @@
 		$modulos_url=[
 			"usuario"=>"user_list",
 			"usuario_recover"=>"user_recover",
-			"movimientos"=>"movimiento_list",
+			"movimiento"=>"movimientos_list",
 			"producto"=>"product_list"
 		];
 

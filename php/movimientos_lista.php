@@ -5,20 +5,21 @@ $tabla = "";
 
 if (isset($busqueda) && $busqueda != "") {
 
-	$consulta_datos = "SELECT * FROM PRODUCTO,INVENTARIO 
-	where PRODUCTO.id_producto=INVENTARIO.id_producto AND deleted='0' AND (PRODUCTO.nombre_prod 
-	LIKE '%$busqueda%' OR PRODUCTO.presentacion LIKE '%$busqueda%') ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
+	$consulta_datos = "SELECT * FROM MOVIMIENTO,INVENTARIO 
+	where MOVIMIENTO.id_inventario=INVENTARIO.id_inventario AND deleted='0' AND (MOVIMIENTO.tipo 
+	LIKE '%$busqueda%' OR MOVIMIENTO.cantidad LIKE '%$busqueda%' OR MOVIMIENTO.descripcion LIKE '%$busqueda%') ORDER BY PRODUCTO.nombre_prod 
+    ASC LIMIT $inicio,$registros";
 
-	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0' 
-	AND  nombre_prod LIKE '%$busqueda%' OR presentacion 
+	$consulta_total = "SELECT COUNT(id_movimiento) FROM MOVIMIENTO WHERE deleted='0' 
+	AND  tipo LIKE '%$busqueda%' OR descripcion 
 	LIKE '%$busqueda%' ";
 } else {
 
-	$consulta_datos = "SELECT * FROM PRODUCTO,INVENTARIO 
-	where PRODUCTO.id_producto=INVENTARIO.id_producto AND deleted='0' 
-	ORDER BY nombre_prod ASC LIMIT $inicio,$registros";
+	$consulta_datos = "SELECT * FROM MOVIMIENTO,INVENTARIO 
+	where MOVIMIENTO.id_inventario=INVENTARIO.id_inventario AND deleted='0' 
+	ORDER BY fecha ASC LIMIT $inicio,$registros";
 
-	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0'";
+	$consulta_total = "SELECT COUNT(id_movimiento) FROM MOVIMIENTO WHERE deleted='0'";
 }
 
 $conexion = conexion2();
@@ -37,26 +38,27 @@ if ($total >= 1 && $pagina <= $Npaginas) {
 	foreach ($datos as $rows) {
 		$tabla .= '
 				<article class="media">
-			        <figure class="media-left image is-128x128" >';
+			        <figure class="media-left">
+			            <p class="image is-64x64">';
 		if (is_file("./img/producto/" . $rows['foto'])) {
-			$tabla .= '<button type="button"> <img src="./img/producto/' . $rows['foto'] . '"/></button>';
+			$tabla .= '<img src="./img/producto/' . $rows['foto'] . '">';
 		} else {
 			$tabla .= '<img src="./img/producto.png">';
 		}
-		$tabla .= '</figure>
+		$tabla .= '</p>
+			        </figure>
 			        <div class="media-content">
 			            <div class="content">
 			              <p>
-			                <strong>' . $contador . ' - ' . $rows['nombre_prod'] . '</strong><br>
-			                <strong>Precio:</strong> $' . $rows['precio'] . ' 
-							<strong>Marca:</strong> ' . $rows['marca'] . '
-							<strong>Stock:</strong> ' . $rows['stock'] . '
-							<strong>Descripción:</strong> ' . $rows['presentacion'] . '
+			                <strong>' . $contador . ' - ' . $rows['tipo'] . '</strong><br>
+			                <strong>Cantidad:</strong> $' . $rows['cantidad'] . ' 
+							<strong>Fecha:</strong> ' . $rows['fecha'] . '
+							<strong>Descripción:</strong> ' . $rows['descripcion'] . '
 			              </p>
 			            </div>
 			            <div class="has-text-right">
-			                <a href="index.php?vista=product_update&product_id_up=' . $rows['id_producto'] . '" class="button is-success is-rounded is-small">Actualizar</a>
-			                <a href="' . $url . $pagina . '&product_id_del=' . $rows['id_producto'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
+			                <a href="index.php?vista=product_update&product_id_up=' . $rows['id_movimiento'] . '" class="button is-success is-rounded is-small">Actualizar</a>
+			                <a href="' . $url . $pagina . '&product_id_del=' . $rows['id_movimiento'] . '" class="button is-danger is-rounded is-small">Eliminar</a>
 			            </div>
 			        </div>
 			    </article>

@@ -15,6 +15,7 @@
 		  	<div class="column">
 		    	<div class="control">
 					<label>Nombre</label>
+					<span>*</span>
 				  	<input class="input" type="text" name="producto_nombre" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required >
 				</div>
 		  	</div>
@@ -23,24 +24,28 @@
 		  	<div class="column">
 		    	<div class="control">
 					<label>Precio</label>
+					<span>*</span>
 				  	<input class="input" type="text" name="producto_precio" pattern="[0-9.]{1,25}" maxlength="25" required >
 				</div>
 		  	</div>
 			  <div class="column">
 		    	<div class="control">
 					<label>Stock</label>
+					<span>*</span>
 				  	<input class="input" type="text" name="producto_stock" pattern="[0-9.]{1,25}" maxlength="25" required >
 				</div>
 		  	</div>
 		  	<div class="column">
 			  <div class="control">
 					<label>Marca</label>
+					<span>*</span>
 				  	<input class="input" type="text" name="producto_marca" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,70}" maxlength="70" required >
 				</div>
 		  	</div>
 		  	<div class="column">
 				<div class="control">
 					<labes>Descripción</labes>
+					<span>*</span>
 				  	<textarea class="textarea" name="producto_descripcion" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ().,$#\-\/ ]{1,500}" maxlength="500" required ></textarea>
 				</div>
 		  	</div>

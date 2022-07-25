@@ -2,13 +2,13 @@
 
     <div class="navbar-brand">
         <a class="navbar-item" href="index.php?vista=home">
-		<img src="img/logo.jpg" alt="logo" class="logo2">
+            <img src="img/logo.jpg" alt="logo" class="logo2">
         </a>
 
         <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
-        <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
+            <span aria-hidden="true"></span>
         </a>
     </div>
 
@@ -19,19 +19,19 @@
                 <a class="navbar-link">Usuarios</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
                     <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=user_new" class="navbar-item">Nuevo</a>
                     <a href="index.php?vista=user_recover" class="navbar-item">Recuperar Usuarios</a>
                 </div>
             </div>
 
-            <div class="navbar-item has-dropdown is-hoverable">
+            <!--<div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">Movimientos</a>
                 <div class="navbar-dropdown">
-                <a href="index.php?vista=movimientos_list" class="navbar-item">Lista</a>
-
+                    <a href="index.php?vista=movimientos_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=movimiento_new" class="navbar-item">Nuevo</a>
                 </div>
-            </div>
+            </div>!-->
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">Productos</a>

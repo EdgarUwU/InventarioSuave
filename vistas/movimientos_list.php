@@ -15,7 +15,7 @@
     <div class="columns">
         <div class="column">
             <form action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="usuario">   
+                <input type="hidden" name="modulo_buscador" value="movimiento">   
                 <div class="field is-grouped">
                     <p class="control is-expanded">
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
@@ -31,9 +31,9 @@
     <div class="columns">
         <div class="column">
             <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="usuario"> 
-                <input type="hidden" name="eliminar_buscador" value="usuario">
-                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_usuario']; ?>”</strong></p>
+                <input type="hidden" name="modulo_buscador" value="movimiento"> 
+                <input type="hidden" name="eliminar_buscador" value="movimiento">
+                <p>Estas buscando <strong>“<?php echo $_SESSION['movimiento']; ?>”</strong></p>
                 <br>
                 <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>
             </form>
@@ -55,12 +55,12 @@
             }
 
             $pagina=limpiar_cadena($pagina);
-            $url="index.php?vista=movimiento_list&page="; /* <== */
-            $registros=15;
+            $url="index.php?vista=movimientos_list&page="; /* <== */
+            $registros=8;
             $busqueda=$_SESSION['busqueda_movimiento']; /* <== */
 
             # Paginador usuario #
-            require_once "./php/movimiento_lista.php";
+            require_once "./php/movimientos_lista.php";
         } 
     ?>
 </div>
@@ -71,7 +71,7 @@
 
         # Eliminar usuario #
         if(isset($_GET['user_id_del'])){
-            require_once "./php/movimiento_eliminar.php";
+            require_once "./php/movimientos_eliminar.php";
         }
 
         if(!isset($_GET['page'])){
@@ -84,11 +84,11 @@
         }
 
         $pagina=limpiar_cadena($pagina);
-        $url="index.php?vista=movimiento_list&page=";
+        $url="index.php?vista=movimientos_list&page=";
         $registros=8;
         $busqueda="";
 
         # Paginador usuario #
-        require_once "./php/movimiento_lista.php";
+        require_once "./php/movimientos_lista.php";
     ?>
 </div>
