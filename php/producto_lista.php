@@ -6,19 +6,19 @@ $tabla = "";
 if (isset($busqueda) && $busqueda != "") {
 
 	$consulta_datos = "SELECT * FROM PRODUCTO,INVENTARIO 
-	where PRODUCTO.id_producto=INVENTARIO.id_producto AND deleted='0' AND (PRODUCTO.nombre_prod 
+	where PRODUCTO.id_producto=INVENTARIO.id_producto AND PRODUCTO.deleted='0' AND (PRODUCTO.nombre_prod 
 	LIKE '%$busqueda%' OR PRODUCTO.presentacion LIKE '%$busqueda%') ORDER BY PRODUCTO.nombre_prod ASC LIMIT $inicio,$registros";
 
-	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0' 
+	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE PRODUCTO.deleted='0' 
 	AND  nombre_prod LIKE '%$busqueda%' OR presentacion 
 	LIKE '%$busqueda%' ";
 } else {
 
 	$consulta_datos = "SELECT * FROM PRODUCTO,INVENTARIO 
-	where PRODUCTO.id_producto=INVENTARIO.id_producto AND deleted='0' 
+	where PRODUCTO.id_producto=INVENTARIO.id_producto AND PRODUCTO.deleted='0' 
 	ORDER BY nombre_prod ASC LIMIT $inicio,$registros";
 
-	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE deleted='0'";
+	$consulta_total = "SELECT COUNT(id_producto) FROM PRODUCTO WHERE PRODUCTO.deleted='0'";
 }
 
 $conexion = conexion2();
@@ -39,7 +39,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
 				<article class="media">
 			        <figure class="media-left image is-128x128" >';
 		if (is_file("./img/producto/" . $rows['foto'])) {
-			$tabla .= '<button type="button"> <img src="./img/producto/' . $rows['foto'] . '"/></button>';
+			$tabla .= '<img src="./img/producto/' . $rows['foto'] . '"/>';
 		} else {
 			$tabla .= '<img src="./img/producto.png">';
 		}
