@@ -21,7 +21,13 @@
 	<div class="form-rest mb-2 mt-2"></div>
 	
 	<h2 class="title has-text-centered"><?php echo $datos['nombre_prod']; ?></h2>
-	<center><img src="./img/producto/<?php echo $datos['foto']; ?>" class="image center" width="200px" height="auto" style="align-items: center;"></center>
+	<?php
+		if ($datos['foto'] != "") {
+			echo '<center><img src="./img/producto/' . $datos['foto'] . '" class="image center" width="200px" height="auto" style="align-items: center;"></center>';
+		} else {
+			echo '<center><img src="./img/producto/producto.png" class="image center" width="200px" height="auto" style="align-items: center;"></center>';
+		}
+	?>
 
 	<form action="./php/producto_actualizar.php" method="POST" class="FormularioAjax" autocomplete="off" >
 
