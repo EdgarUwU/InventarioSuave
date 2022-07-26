@@ -123,7 +123,7 @@
         ":stock"=>$stock,
         ":precio"=>$precio,
         ":presentacion"=>$descripcion,
-        ":modified"=>date("Y-m-d H:i:s"),
+        ":modified"=>gmdate("Y-m-d H:i:s",time()-18000),
         ":modified_by"=>$_SESSION['id'],
         ":id"=>$id
     ];

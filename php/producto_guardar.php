@@ -199,6 +199,7 @@ if ($guardar_producto->rowCount() == 1) {
             <div class="notification is-info is-light">
                 <strong>¡PRODUCTO REGISTRADO!</strong><br>
                 El producto se registro con exito
+                <a href="index.php?vista=product_list"</a>
             </div>
         ';
 } else {

@@ -36,7 +36,7 @@
 
 
     /*== Verificando campos obligatorios del usuario ==*/
-    if($nombre=="" || $username==""){
+    if($nombre=="" || $username=="" || $contrasena=="" || $contrasena2==""){
         echo '
             <div class="notification is-danger is-light">
                 <strong>¡Ocurrio un error inesperado!</strong><br>
@@ -137,22 +137,22 @@
     $actualizar_usuario=conexion();
     $actualizar_usuario=$actualizar_usuario->prepare("UPDATE USUARIOS SET username=:username,nombre=:nombre,apellido_pat=:apellido_pat,
     apellido_mat=:apellido_mat,contrasena=:contrasena,modified=:modified,modified_by=:modified_by WHERE id_usuario=:id");
-
-    $marcadores=[
+//gtm-6
+    $marcadores_usuario=[
         ":nombre"=>$nombre,
         ":apellido_pat"=>$apellido_pat,
         ":apellido_mat"=>$apellido_mat,
         ":username"=>$username,
         ":contrasena"=>$contrasena,
         ":id"=>$id,
-        ":modified"=>date("Y-m-d H:i:s"),
+        ":modified"=>gmdate("Y-m-d H:i:s",time()-18000),
         ":modified_by"=>$_SESSION['id']
     ];
 
-    if($actualizar_usuario->execute($marcadores)){
+    if($actualizar_usuario->execute($marcadores_usuario)){
         echo '
             <div class="notification is-info is-light">
-                <strong>¡USUARIO ACTUALIZADO!</strong><br>
+                <strong>USUARIO ACTUALIZADO!</strong><br>
                 El usuario se actualizo con exito
             </div>
         ';
@@ -164,4 +164,3 @@
             </div>
         ';
     }
-    $actualizar_usuario=null;
