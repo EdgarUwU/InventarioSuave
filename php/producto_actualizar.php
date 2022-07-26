@@ -114,13 +114,12 @@
 
     /*== Actualizando datos ==*/
     $actualizar_producto=conexion();
-    $actualizar_producto=$actualizar_producto->prepare("UPDATE PRODUCTO SET nombre_prod=:nombre,marca=:marca,stock=:stock,precio=:precio,
+    $actualizar_producto=$actualizar_producto->prepare("UPDATE PRODUCTO SET nombre_prod=:nombre,marca=:marca,precio=:precio,
                                                         presentacion=:presentacion,modified=:modified,modified_by=:modified_by WHERE id_producto=:id");
 
     $marcadores=[
         ":nombre"=>$nombre,
         ":marca"=>$marca,
-        ":stock"=>$stock,
         ":precio"=>$precio,
         ":presentacion"=>$descripcion,
         ":modified"=>gmdate("Y-m-d H:i:s",time()-18000),
@@ -130,6 +129,17 @@
 
 
     if($actualizar_producto->execute($marcadores)){
+    $actualizar_stock=conexion();
+    $actualizar_stock=$actualizar_stock->prepare("UPDATE INVENTARIO SET stock=:stock,modified=:modified,
+                                                 modified_by=:modified_by WHERE id_producto=:id");
+
+    $marcadores_stock=[
+        ":stock"=>$stock,
+        ":modified"=>gmdate("Y-m-d H:i:s",time()-18000),
+        ":modified_by"=>$_SESSION['id'],
+        ":id"=>$id
+    ];
+    $actualizar_stock->execute($marcadores_stock);
         echo '
             <div class="notification is-info is-light">
                 <strong>¡PRODUCTO ACTUALIZADO!</strong><br>

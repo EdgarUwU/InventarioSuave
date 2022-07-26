@@ -53,7 +53,8 @@
 		</div>
 		<div class="column">
 			<div class="control">
-				<label>Permiso</label><br>
+				<label>Permiso</label>
+				<span>*</span><br>
 				<div class="select is-rounded">
 					<select name="permiso_usuario">
 						<option value="" selected="">Seleccione una opción</option>
