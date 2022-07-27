@@ -75,10 +75,12 @@ if ($check_user->rowCount() == 1) {
         } else {
             header("Location: index.php?vista=home");
             $login_count=conexion();
-            $login_count=$login_count->prepare("UPDATE USUARIOS set login_count=login_count+1 
-                                                where id_usuario=:id_usuario");
+            $login_count=$login_count->prepare("UPDATE USUARIOS set login_count=login_count+1,
+                                                last_login=:last_login, last_ip=:ip where id_usuario=:id_usuario");
                 $marcadores=[
-                    ':id_usuario'=>$_SESSION['id']
+                    ':id_usuario'=>$_SESSION['id'],
+                    ':ip'=>$ip,
+                    ':last_login'=>gmdate("Y-m-d H:i:s",time()-18000),
                 ];
                 $login_count->execute($marcadores);
         }

@@ -2,7 +2,6 @@
     <h1 class="title">Productos</h1>
     <h2 class="subtitle">Lista de productos</h2>
 </div>
-
 <div class="container pb-6">
     <?php
         require_once "./php/main.php";
@@ -16,7 +15,7 @@
     <div class="columns">
         <div class="column">
             <form action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="producto">
+                <input type="hidden" name="modulo_buscador" value="producto">   
                 <div class="field is-grouped">
                     <p class="control is-expanded">
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
@@ -40,15 +39,38 @@
             </form>
         </div>
     </div>
-    <?php } ?>
+    <?php
+            # Eliminar producto #
+            if(isset($_GET['user_id_del'])){
+                require_once "./php/producto_eliminar.php";
+            }
+
+            if(!isset($_GET['page'])){
+                $pagina=1;
+            }else{
+                $pagina=(int) $_GET['page'];
+                if($pagina<=1){
+                    $pagina=1;
+                }
+            }
+
+            $pagina=limpiar_cadena($pagina);
+            $url="index.php?vista=user_list&page="; /* <== */
+            $registros=5;
+            $busqueda=$_SESSION['busqueda_producto']; /* <== */
+
+            # Paginador producto #
+            require_once "./php/producto_lista.php";
+        } 
+    ?>
 </div>
 
-<div class="container pt-4">
+<div class="container pt-4">  
     <?php
         require_once "./php/main.php";
 
         # Eliminar producto #
-        if(isset($_GET['product_id_del'])){
+        if(isset($_GET['user_id_del'])){
             require_once "./php/producto_eliminar.php";
         }
 
@@ -62,8 +84,8 @@
         }
 
         $pagina=limpiar_cadena($pagina);
-        $url="index.php?vista=product_list&page="; /* <== */
-        $registros=8;
+        $url="index.php?vista=user_list&page=";
+        $registros=5;
         $busqueda="";
 
         # Paginador producto #

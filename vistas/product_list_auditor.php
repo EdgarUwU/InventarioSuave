@@ -1,7 +1,8 @@
 <div class="container is-fluid mb-6">
-    <h1 class="title">Usuarios</h1>
-    <h2 class="subtitle">Lista de usuarios</h2>
+    <h1 class="title">Productos</h1>
+    <h2 class="subtitle">Lista de productos</h2>
 </div>
+
 <div class="container pb-6">
     <?php
         require_once "./php/main.php";
@@ -10,12 +11,12 @@
             require_once "./php/buscador.php";
         }
 
-        if(!isset($_SESSION['busqueda_usuario']) && empty($_SESSION['busqueda_usuario'])){
+        if(!isset($_SESSION['busqueda_producto_auditor']) && empty($_SESSION['busqueda_producto_auditor'])){
     ?>
     <div class="columns">
         <div class="column">
             <form action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="usuario">   
+                <input type="hidden" name="modulo_buscador" value="producto_auditor">
                 <div class="field is-grouped">
                     <p class="control is-expanded">
                         <input class="input is-rounded" type="text" name="txt_buscador" placeholder="¿Qué estas buscando?" pattern="[a-zA-Z0-9áéíóúÁÉÍÓÚñÑ ]{1,30}" maxlength="30" >
@@ -31,47 +32,24 @@
     <div class="columns">
         <div class="column">
             <form class="has-text-centered mt-6 mb-6" action="" method="POST" autocomplete="off" >
-                <input type="hidden" name="modulo_buscador" value="usuario"> 
-                <input type="hidden" name="eliminar_buscador" value="usuario">
-                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_usuario']; ?>”</strong></p>
+                <input type="hidden" name="modulo_buscador" value="producto_auditor"> 
+                <input type="hidden" name="eliminar_buscador" value="producto_auditor">
+                <p>Estas buscando <strong>“<?php echo $_SESSION['busqueda_producto_auditor']; ?>”</strong></p>
                 <br>
                 <button type="submit" class="button is-danger is-rounded">Eliminar busqueda</button>
             </form>
         </div>
     </div>
-    <?php
-            # Eliminar usuario #
-            if(isset($_GET['user_id_del'])){
-                require_once "./php/usuario_eliminar.php";
-            }
-
-            if(!isset($_GET['page'])){
-                $pagina=1;
-            }else{
-                $pagina=(int) $_GET['page'];
-                if($pagina<=1){
-                    $pagina=1;
-                }
-            }
-
-            $pagina=limpiar_cadena($pagina);
-            $url="index.php?vista=user_list&page="; /* <== */
-            $registros=5;
-            $busqueda=$_SESSION['busqueda_usuario']; /* <== */
-
-            # Paginador usuario #
-            require_once "./php/usuario_lista.php";
-        } 
-    ?>
+    <?php } ?>
 </div>
 
-<div class="container pt-4">  
+<div class="container pt-4">
     <?php
         require_once "./php/main.php";
 
-        # Eliminar usuario #
-        if(isset($_GET['user_id_del'])){
-            require_once "./php/usuario_eliminar.php";
+        # Eliminar producto #
+        if(isset($_GET['product_id_del'])){
+            require_once "./php/producto_eliminar.php";
         }
 
         if(!isset($_GET['page'])){
@@ -84,11 +62,11 @@
         }
 
         $pagina=limpiar_cadena($pagina);
-        $url="index.php?vista=user_list&page=";
-        $registros=8;
+        $url="index.php?vista=product_list_auditor&page="; /* <== */
+        $registros=5;
         $busqueda="";
 
-        # Paginador usuario #
-        require_once "./php/usuario_lista.php";
+        # Paginador producto #
+        require_once "./php/producto_lista_auditor.php";
     ?>
 </div>

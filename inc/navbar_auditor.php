@@ -18,14 +18,14 @@
         <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">Usuarios</a>
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=user_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=user_list_auditor" class="navbar-item">Lista</a>
                 </div>
             </div>
 
             <div class="navbar-item has-dropdown is-hoverable">
                 <a class="navbar-link">Movimientos</a>
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=movimientos_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=movimientos_list_auditor" class="navbar-item">Lista</a>
                 </div>
             </div>
 
@@ -33,7 +33,7 @@
                 <a class="navbar-link">Productos</a>
 
                 <div class="navbar-dropdown">
-                    <a href="index.php?vista=product_list" class="navbar-item">Lista</a>
+                    <a href="index.php?vista=product_list_auditor" class="navbar-item">Lista</a>
 
                 </div>
             </div>
