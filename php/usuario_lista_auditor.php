@@ -42,16 +42,12 @@ if ($total >= 1 && $pagina <= $Npaginas) {
 		$last_ip = $rows['last_ip'];
         $estado = $rows['deleted'];
         $modificado = $rows['modified'];
-        $modificado_por = $conexion->query("SELECT username,modified_by FROM USUARIOS WHERE id_usuario='" . $rows['modified_by'] . "'");
-		$modificado_por = $modificado_por->fetchAll();
-		$creado_por = $conexion->query("SELECT username FROM USUARIOS WHERE id_usuario='" . $rows['create_by'] . "'");
-		$creado_por = $creado_por->fetchAll();
-		$creado_por = $creado_por[0];
+        $modificado_por = $rows['modified_by'];
+		$creado_por = $conexion->query("SELECT * FROM USUARIOS WHERE id_usuario='" . $rows['create_by'] . "'");
+		$creado_por = $creado_por->fetch();
 		$creado_por = $creado_por['username'];
-		if ($modificado_por['modified_by'] == "") {
+		if ($modificado_por == "") {
 			$modificado_por = "No se ha modificado";
-		} else {
-			$modificado_por = $modificado_por['username'];
 		}
 		if ($last_ip == "") {
 			$last_ip = "No ha iniciado sesión";
@@ -87,7 +83,7 @@ if ($total >= 1 && $pagina <= $Npaginas) {
                             <strong>Creado:</strong> ' . $rows['created'] . '
 							<strong>Creado por:</strong> ' . $creado_por. '
                             <strong>Ultima modificación el:</strong> ' . $modificado . '<br>
-                            <strong>Modificado por:</strong> ' . $modificado_por . '
+                            <strong>Modificado por:</strong> ' . $modificado_por. '
                             <strong>Numero de inicio de sesión:</strong> ' . $rows['login_count'] . '
 							<strong>Ultimo inicio de sesión:</strong> ' . $last_login . '
 							<strong>Ultima conexión desde IP:</strong> ' . $last_ip . '
